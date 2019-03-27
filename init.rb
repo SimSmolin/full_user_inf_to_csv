@@ -11,7 +11,7 @@ end
 Redmine::Plugin.register :full_user_inf_to_csv do
   name 'Full User information upload to .csv plugin'
   author 'Sergey Melnikov'
-  description 'This is a plugin for Redmine. Added users custom fiels to time_entry report'
+  description 'This is a plugin for Redmine. Added users custom fields to time_entry report'
   version '0.0.1'
   url 'https://github.com/SimSmolin/full_user_inf_to_csv.git'
   author_url 'https://github.com/SimSmolin'
