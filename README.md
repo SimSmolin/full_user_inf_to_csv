@@ -1,4 +1,4 @@
-# Redmine TimeEntry(timelog) CustomField addons plugin 
+# Redmine full user information in .csv report 
 
 This is Redmine plugin to add one feature. Added users custom fields to time_entry .csv report.
 
