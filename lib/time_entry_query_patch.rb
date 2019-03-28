@@ -12,9 +12,9 @@ module TimeEntryQueryPatch
 
   module InstanceMethods
     def available_columns_with_patch
-      self.class.available_columns += [QueryAssociationColumn.new(:user,:mail, :caption => :field_mail)]
       return @available_columns if @available_columns
       @available_columns = self.class.available_columns.dup
+      @available_columns += [QueryAssociationColumn.new(:user,:mail, :caption => :field_mail)]
       @available_columns += TimeEntryCustomField.visible.
           map {|cf| QueryCustomFieldColumn.new(cf) }
       @available_columns += issue_custom_fields.visible.
