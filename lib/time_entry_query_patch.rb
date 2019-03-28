@@ -21,6 +21,10 @@ module TimeEntryQueryPatch
           map {|cf| QueryAssociationCustomFieldColumn.new(:issue, cf, :totalable => false) }
       @available_columns += ProjectCustomField.visible.
           map {|cf| QueryAssociationCustomFieldColumn.new(:project, cf) }
+
+      @available_columns += UserCustomField.visible.
+          map {|cf| QueryAssociationCustomFieldColumn.new(:user, cf, :totalable => false) }
+
       @available_columns
     end
 
