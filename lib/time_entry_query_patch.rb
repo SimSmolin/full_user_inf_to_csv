@@ -6,7 +6,6 @@ module TimeEntryQueryPatch
 
     base.class_eval do
       unloadable
-      alias_method :available_columns_without_patch, :available_columns # method "available_columns" was modify
       alias_method :available_columns, :available_columns_with_patch # method "available_columns" was modify
     end
   end
@@ -14,16 +13,15 @@ module TimeEntryQueryPatch
   module InstanceMethods
     def available_columns_with_patch
       self.class.available_columns += [QueryAssociationColumn.new(:user,:mail, :caption => :field_mail)]
-      available_columns_without_patch
-      # return @available_columns if @available_columns
-      # @available_columns = self.class.available_columns.dup
-      # @available_columns += TimeEntryCustomField.visible.
-      #     map {|cf| QueryCustomFieldColumn.new(cf) }
-      # @available_columns += issue_custom_fields.visible.
-      #     map {|cf| QueryAssociationCustomFieldColumn.new(:issue, cf, :totalable => false) }
-      # @available_columns += ProjectCustomField.visible.
-      #     map {|cf| QueryAssociationCustomFieldColumn.new(:project, cf) }
-      # @available_columns
+      return @available_columns if @available_columns
+      @available_columns = self.class.available_columns.dup
+      @available_columns += TimeEntryCustomField.visible.
+          map {|cf| QueryCustomFieldColumn.new(cf) }
+      @available_columns += issue_custom_fields.visible.
+          map {|cf| QueryAssociationCustomFieldColumn.new(:issue, cf, :totalable => false) }
+      @available_columns += ProjectCustomField.visible.
+          map {|cf| QueryAssociationCustomFieldColumn.new(:project, cf) }
+      @available_columns
     end
 
   end
